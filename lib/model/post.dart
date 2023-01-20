@@ -3,19 +3,19 @@ import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Post {
-  final String id;
+  final String userName;
   final String text;
   // final Timestamp createAt;
 
   Post({
-    required this.id,
+    required this.userName,
     required this.text,
     // this.createAt,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'userName': userName,
       'text': text,
     };
   }
@@ -23,7 +23,7 @@ class Post {
   static Post fromsnap(QueryDocumentSnapshot snap) {
     Map<String, dynamic> data = snap.data()! as Map<String, dynamic>;
     return Post(
-      id: data['id'],
+      userName: data['userName'],
       text: data['text'],
     );
   }

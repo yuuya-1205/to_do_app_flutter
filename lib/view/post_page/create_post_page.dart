@@ -16,6 +16,7 @@ class CreatePostPage extends StatefulWidget {
 
 class _CreatePostPageState extends State<CreatePostPage> {
   final _textController = TextEditingController();
+  final _userNameContoroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +34,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 height: 12,
               ),
               TextFormField(
+                controller: _userNameContoroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              TextFormField(
                 controller: _textController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -41,40 +48,19 @@ class _CreatePostPageState extends State<CreatePostPage> {
               const SizedBox(
                 height: 12,
               ),
-              RoundedButton(
-                text: 'こんにちは',
-                color: Colors.amber,
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => const TopPage()),
-                    ),
-                  );
-                },
-              ),
               ElevatedButton(
                 onPressed: () async {
-                  final postId = PostRepository.postCollection.doc().id;
                   final text = _textController.text;
-
+                  final userName = _userNameContoroller.text;
                   // PostRepository.addPost(
                   //   text,
                   //   postId,
                   // );
                   final post = Post(
-                    id: postId,
+                    userName: userName,
                     text: text,
                   );
                   await PostRepository.addPost(post);
-
-                  // final post = Post(
-                  //   id: postId,
-                  //   text: text,
-                  // );
-                  // PostRepository.postCollection
-                  //     .doc(postId)
-                  //     .set(post.toMap(), SetOptions(merge: true));
 
                   ///インスタンスを作っている。
 

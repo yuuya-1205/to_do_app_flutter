@@ -86,14 +86,36 @@ class _TopPageState extends State<TopPage> {
                   }
                   List<Post> posts = snapshot.data!;
                   return ListView(
+                      padding: const EdgeInsets.all(8),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       children: posts.map((post) {
-                        return Column(
-                          children: [
-                            Text(post.text),
-                            Text(post.id),
-                          ],
+                        return Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text('ユーザー名:'),
+                                  Text(post.userName),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                children: [
+                                  const Text('投稿内容:'),
+                                  Text(post.text),
+                                ],
+                              ),
+                            ],
+                          ),
                         );
                       }).toList());
 
